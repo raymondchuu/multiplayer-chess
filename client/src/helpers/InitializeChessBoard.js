@@ -5,7 +5,7 @@ import Knight from '../pieces/Knight';
 import Rook from '../pieces/Rook';
 import Pawn from '../pieces/Pawn';
 
-export default function initializeChessBoard() {
+export default function initializeChessBoard(player) {
     const squares = new Array(64).fill(null);
 
     for (var i = 8; i < 16; ++i) {
@@ -32,6 +32,6 @@ export default function initializeChessBoard() {
     squares[61] = new Bishop(1);
     squares[62] = new Knight(1);
     squares[63] = new Rook(1);
-
+    
     return squares;
 }

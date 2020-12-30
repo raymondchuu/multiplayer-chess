@@ -1,3 +1,4 @@
+import React from 'react';
 import Piece from './Piece';
 
 export default class Pawn extends Piece {
@@ -21,7 +22,7 @@ export default class Pawn extends Piece {
         return this.name;
     }
 
-    isMoveValid = (initialPos, endPos, endPosOccupied) => {
+    isMoveValid (initialPos, endPos, endPosOccupied) {
         if (this.player === 1) {
             if ((endPos === initialPos - 8 && !endPosOccupied) ) {
                 return true;

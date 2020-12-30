@@ -8,4 +8,8 @@ export default class Piece {
             backgroundSize: 'cover'
         };
     }
+
+    testFunction() {
+        
+    }
 }

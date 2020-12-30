@@ -16,29 +16,58 @@ export default class Board extends React.Component {
     render() {
         var board = [];
         
-        for (var i = 0; i < 8; ++i) {
-            var row = [];
-            for (var j = 0; j < 8; ++j) {
-                if (i % 2 === 0) {
-                    if (j % 2 === 0) {
-                        row.push(this.renderSquare(i * 8 + j, "light"));
+        if (this.props.player === 1) {
+            for (var i = 0; i < 8; ++i) {
+                var row = [];
+                for (var j = 0; j < 8; ++j) {
+                    if (i % 2 === 0) {
+                        if (j % 2 === 0) {
+                            row.push(this.renderSquare(i * 8 + j, "light"));
+                        }
+                        else {
+                            row.push(this.renderSquare(i * 8 + j, "dark"));
+                        }
                     }
+    
                     else {
-                        row.push(this.renderSquare(i * 8 + j, "dark"));
+                        if (j % 2 === 0) {
+                            row.push(this.renderSquare(i * 8 + j, "dark"));
+                        }
+                        else {
+                            row.push(this.renderSquare(i * 8 + j, "light"));
+                        }
                     }
                 }
-
-                else {
-                    if (j % 2 === 0) {
-                        row.push(this.renderSquare(i * 8 + j, "dark"));
-                    }
-                    else {
-                        row.push(this.renderSquare(i * 8 + j, "light"));
-                    }
-                }
+                board.push(<div>{row}</div>);
             }
-            board.push(<div>{row}</div>);
         }
+
+        else {
+            for (var i = 7; i >= 0; --i) {
+                var row = [];
+                for (var j = 7; j >= 0; --j) {
+                    if (i % 2 === 0) {
+                        if (j % 2 === 0) {
+                            row.push(this.renderSquare(i * 8 + j, "light"));
+                        }
+                        else {
+                            row.push(this.renderSquare(i * 8 + j, "dark"));
+                        }
+                    }
+    
+                    else {
+                        if (j % 2 === 0) {
+                            row.push(this.renderSquare(i * 8 + j, "dark"));
+                        }
+                        else {
+                            row.push(this.renderSquare(i * 8 + j, "light"));
+                        }
+                    }
+                }
+                board.push(<div>{row}</div>);
+            }
+        }
+
 
         return (
             <div className="board-container">

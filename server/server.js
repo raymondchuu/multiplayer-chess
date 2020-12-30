@@ -48,8 +48,8 @@ io.on('connection', (socket) => {
     socket.on("shouldGameStart", (gameId) => {
         console.log(numClients[gameId]);
         if (numClients[gameId] === 2) {
-            console.log(gameId);
             io.in(gameId).emit("start game", clientNames[gameId]);
+            io.in(gameId).emit('message', { text: "Welcome to Online Chess!", user: "admin" });
         }
 
         if (numClients[gameId] > 2) {
@@ -59,6 +59,11 @@ io.on('connection', (socket) => {
 
     socket.on('move', (state) => {
         io.in(state.gameId).emit('userMove', state); 
+    })
+
+    socket.on("sendMessage", (message, gameId, username, callback) => {
+        io.in(gameId).emit('message', { text: message, user: username })
+        callback();
     })
 })
 

@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import Game from './Game';
-import { Redirect, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { socket } from '../socket/socket';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+
+import '../styles/Lobby.css';
 
 export default function Lobby(props) {
     const [redirect, setRedirect] = useState(false);
     const gameId = useParams().gameId;
-    const [roomNames, setRoomNames] = useState([]);
 
     useEffect(() => {
-/*         socket.on("start game", (usernames) => {
-            setRoomNames(usernames);
-        }); */
-
         if (props.username) {
             setRedirect(true);
         }
@@ -31,10 +30,12 @@ export default function Lobby(props) {
                 <Game username={props.username} gameId={gameId} />
             </div>
         :
-            <div>
-                <p>Enter username</p> <br/>
-                <input type="text" onChange={(event) => {props.setUsername(event.target.value)}} /> <br/>
-                <button onClick={() => newPlayerJoin()}>Enter</button>
+            <div className="lobby-container">
+                <p>Enter your name to start the game!</p>
+                <TextField id="outlined-basic" style={{marginBottom: '1%', width: '15vw'}} label="Name" variant="outlined" onChange={(event) => {props.setUsername(event.target.value)}} required />
+                <Button variant="contained" color="primary" onClick={() => newPlayerJoin()}>
+                    Enter
+                </Button>
             </div>
         }
         </div>
