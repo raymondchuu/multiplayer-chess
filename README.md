@@ -4,7 +4,7 @@ Multiplayer chess game that allows clients to play online at the comfort of thei
 This project was designed with ReactJs, CSS in the front end and NodeJS, Express, and socket.IO in the back end.
 
 ## Final Product
-![alt text](https://github.com/raymondchuu/multiplayer-chess/blob/master/src/styles/chessGameplay.png?raw=true)
+![alt text](https://github.com/raymondchuu/multiplayer-chess/blob/master/client/src/styles/chessGameplay.png?raw=true)
 
 ## Dependencies
 - react-router-dom
