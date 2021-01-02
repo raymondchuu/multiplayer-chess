@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     margin: auto;
-    width: 80%;
+    width: 90%;
 }
 
 .game-lobby-container p {
@@ -18,9 +18,14 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
 
 
     margin: auto;
     width: 80%;
+}
+
+.chat-interation {
+    display: flex;
+    flex-direction: column;
 }

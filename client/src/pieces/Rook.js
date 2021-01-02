@@ -20,11 +20,12 @@ export default class Rook extends Piece {
     }
 
     isMoveValid = (initialPos, endPos) => {
-        const diff = Math.abs(endPos - initialPos);
+        const mod = initialPos % 8;
+        const diff = 8 - mod;
 
         return (
-            diff % 8 === 0 ||
-            diff < 8
+            Math.abs(initialPos - endPos) % 8 === 0 ||
+            (endPos >= (initialPos - mod) && endPos < (initialPos + diff))
         )
     }
 

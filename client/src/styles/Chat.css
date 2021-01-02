@@ -54,7 +54,7 @@
   .messageBox {
     background: #F3F3F3;
     border-radius: 20px;
-    padding: 5px 20px;
+    padding: 0px 15px;
     color: white;
     display: inline-block;
     max-width: 80%;
@@ -74,9 +74,14 @@
   
   .messageContainer {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    flex-direction: column;
     padding: 0 5%;
     margin-top: 3px;
+  }
+
+  .messageContainer p {
+      font-size: 16px;
   }
   
   .sentText {
@@ -85,6 +90,7 @@
     font-family: Helvetica;
     color: #828282;
     letter-spacing: 0.3px;
+    margin-bottom: 5px;
   }
   
   .pl-10 {
@@ -97,10 +103,12 @@
   
   .justifyStart {
     justify-content: flex-start;
+    align-items: flex-start;
   }
   
   .justifyEnd {
     justify-content: flex-end;
+    align-items: flex-end;
   }
   
   .colorWhite {

@@ -9,6 +9,7 @@ const server = http.createServer(app);
 const io = Socketio(server);
 var numClients = {};
 var clientNames = {};
+var rematchCounter = 0;
 
 
 io.on('connection', (socket) => {
@@ -18,7 +19,7 @@ io.on('connection', (socket) => {
         console.log("a user disconnected"); 
         numClients[socket.room]--;
         console.log(numClients[socket.room]);
-    })
+    });
 
 
     socket.on('joinGameLobby', (room) => {
@@ -43,7 +44,7 @@ io.on('connection', (socket) => {
         
         console.log(clientNames[gameId]);
 
-    })
+    });
 
     socket.on("shouldGameStart", (gameId) => {
         console.log(numClients[gameId]);
@@ -55,18 +56,50 @@ io.on('connection', (socket) => {
         if (numClients[gameId] > 2) {
             console.log("room full :(");
         }
-    })
+    });
 
     socket.on('move', (state) => {
         io.in(state.gameId).emit('userMove', state); 
+    });
+
+    socket.on('castle', (data) => {
+        io.in(data.gameId).emit('castleBoard', data);
+    });
+
+    socket.on("rematch", (data) => {
+        rematchCounter += data.num;
+        console.log("rematch counter " + rematchCounter);
+        if (rematchCounter === 2) {
+            rematchCounter = 0;
+            io.in(data.gameId).emit("initiateRematch")
+        }
+    });
+
+    socket.on("clickResign", (data) => {
+        console.log("user clicked resign");
+        io.in(data.gameId).emit("initiateResign");
+    });
+
+    socket.on("enPassant", (data) => {
+        io.in(data.gameId).emit("handleEnpassant", data);
     })
 
+    //messaging chat
     socket.on("sendMessage", (message, gameId, username, callback) => {
         io.in(gameId).emit('message', { text: message, user: username })
         callback();
-    })
+    });
+
+    //video chat
+    socket.on("callUser", (data) => {
+        io.in(data.gameId).emit("hello", { signal: data.signalData, from: data.from })
+    });
+
+    socket.on('acceptCall', (data) => {
+        io.in(data.gameId).emit("callAccepted", data.signal);
+    });
 })
 
-server.listen(4000, () => {
+server.listen(HTTP_PORT, () => {
     console.log(`listening on port ${HTTP_PORT}`);
 })
